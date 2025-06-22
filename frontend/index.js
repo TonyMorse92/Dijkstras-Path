@@ -9,8 +9,8 @@ window.onload = function ()
 	{
 		grid.children[i].onclick = function()
 		{	
-			//sendRequest(this);
-			test(this);
+			sendRequest(this);
+			//test(this);
 		}
 	}	
 }
@@ -22,15 +22,24 @@ function test(num)
 
 function sendRequest(num)
 {
+	var baseURL = "http://127.0.0.1:8000/fib/";
+	var url = baseURL + num.innerHTML.trim();
+	
+	//alert(url);
+	
 	var request = new XMLHttpRequest();
-	const baseURL = "http://127.0.0.1:8000/fib/"
-	var URL = baseURL + num
+	request.onload = process;
 	request.open('GET', url, true);
+	request.send()
 
+}
+
+function process()
+{
 	// Begin accessing JSON data here
 	var data = JSON.parse(this.response);
 
-	if (request.status >= 200 && request.status < 400) 
+	if (this.status >= 200 && this.status < 400) 
 	{
 		alert(data.fib_n);
 	} 
