@@ -18,7 +18,13 @@ app.add_middleware(
 def read_root():
 	return {"Hello": "World"}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-	#return {"item_id": item_id, "q": q}
-	return {"item_id": item_id, "q": "Hello"}
+
+def fib_n(n: int):
+	if n < 2:
+		return 1
+	else:
+		return fib_n(n-1) + fib_n(n-2)
+
+@app.get("/fib/{n}")
+def read_fib(n: int):
+	return {"fib_n": fib_n(n)}
