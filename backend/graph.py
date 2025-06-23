@@ -10,7 +10,7 @@ class Graph:
 	def add_vertex(self, v):
 		self.verticies.append(v)
 
-	def add_edge(self, e, w):
+	def add_edge(self, e):
 		v1 = e.v1
 		v2 = e.v2
 
@@ -21,7 +21,8 @@ class Graph:
 	
 		self.edges.append(e)	
 
-	
+	def __str__(self):
+		return f"{self.verticies}\n\n{self.edges}"	
 
 
 class Edge:
@@ -38,9 +39,9 @@ class Edge:
 
 
 
-e1 = Edge(a, b, 2)
-e2 = Edge(c, d, 3)
-e3 = Edge(a, d, 2)
+e1 = Edge("a", "b", 2)
+e2 = Edge("c", "d", 3)
+e3 = Edge("a", "d", 2)
 
 
 g = Graph()
