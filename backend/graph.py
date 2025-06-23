@@ -22,7 +22,7 @@ class Graph:
 		self.edges.append(e)	
 
 	def __str__(self):
-		return f"{self.verticies}\n\n{self.edges}"	
+		return f"{self.verticies}\n{self.edges}"	
 
 
 class Edge:
