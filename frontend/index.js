@@ -8,28 +8,46 @@ window.onload = function ()
 	for (var i = 0; i < grid.children.length; i++) 
 	{
 		grid.children[i].onclick = function()
-		{	
-			sendRequest(this);
-			//test(this);
+		{
+			sendRequest(this, adjust);
+			
 		}
 	}	
 }
 
-function test(num)
-{	
-	alert(num.innerHTML);
+
+function adjust(num, fib_val)
+{
+	num.innerHTML = fib_val;
 }
 
-function sendRequest(num)
+function sendRequest(num, callback)
 {
 	var baseURL = "http://127.0.0.1:8000/fib/";
 	var url = baseURL + num.innerHTML.trim();
 	
-	//alert(url);
 	
 	var request = new XMLHttpRequest();
-	request.onload = process;
 	request.open('GET', url, true);
+	request.onload = function() {
+	// Begin accessing JSON data here
+	var data = JSON.parse(this.response);
+
+	if (this.status >= 200 && this.status < 400) 
+	{
+		//alert(data.fib_n);
+		callback(num, data.fib_n);
+		
+	} 
+	else 
+	{
+		const errorMessage = document.createElement('marquee');
+		errorMessage.textContent = `Gah, it's not working`;
+	}
+}
+
+
+
 	request.send()
 
 }
@@ -42,6 +60,7 @@ function process()
 	if (this.status >= 200 && this.status < 400) 
 	{
 		alert(data.fib_n);
+		
 	} 
 	else 
 	{
