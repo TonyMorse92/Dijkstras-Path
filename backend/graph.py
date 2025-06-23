@@ -14,4 +14,15 @@ class Weighted_Graph:
 		v1 = e[0]
 		v2 = e[1]
 
+	
+
+
+class Edge:
+	
+	def __init__(self, v1, v2, w):
+		self.v1 = v1
+		self.v2 = v2
+		self.w = w
+
+
 		
