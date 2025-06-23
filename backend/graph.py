@@ -1,7 +1,7 @@
 ### Weighted graph for Dijkstra's algorithm
 
 
-class Weighted_Graph:
+class Graph:
 	
 	def __init__(self):
 		self.verticies = []
@@ -11,8 +11,15 @@ class Weighted_Graph:
 		self.verticies.append(v)
 
 	def add_edge(self, e, w):
-		v1 = e[0]
-		v2 = e[1]
+		v1 = e.v1
+		v2 = e.v2
+
+		if v1 not in self.verticies:
+			self.add_vertex(v1)
+		if v2 not in self.verticies:
+			self.add_vertex(v2)
+	
+		self.edges.append(e)	
 
 	
 
@@ -25,4 +32,22 @@ class Edge:
 		self.w = w
 
 
-		
+	def __repr__(self):
+		return f"Edge of weight {self.w} from {self.v1} to {self.v2}"
+
+
+
+
+e1 = Edge(a, b, 2)
+e2 = Edge(c, d, 3)
+e3 = Edge(a, d, 2)
+
+
+g = Graph()
+
+g.add_edge(e1)
+g.add_edge(e2)
+g.add_edge(e3)
+
+
+print(g)
