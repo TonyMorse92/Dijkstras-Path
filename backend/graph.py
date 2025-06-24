@@ -58,7 +58,7 @@ g.add_edge(e2)
 g.add_edge(e3)
 
 
-#print(g)
-#print("\n\n")
+print(g)
+print("\n\n")
 
 g.find_path("a","b")
