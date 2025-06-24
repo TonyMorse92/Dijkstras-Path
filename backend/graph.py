@@ -25,8 +25,13 @@ class Graph:
 	# I guess I'm implicitly treating this as a directed graph.
 	# Can generalize to undirected later
 	def find_path(self, v1, v2):
+		edges_to_check = []
+		path = []
 		for e in self.edges:
-			print(e.v1)
+			if e.v1 == v1 and e.v2 == v2:
+				path.append(e)
+
+		print(f"The path is: {path}")	
 
 	def __str__(self):
 		return f"{self.verticies}\n{self.edges}"	
