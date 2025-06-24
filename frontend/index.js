@@ -9,22 +9,22 @@ window.onload = function ()
 	{
 		grid.children[i].onclick = function()
 		{
-			sendRequest(this, adjust);
+			sendRequest(this, replaceValue);
 			
 		}
 	}	
 }
 
 
-function adjust(num, fib_val)
+function replaceValue(current_cell, fib_val)
 {
-	num.innerHTML = fib_val;
+	current_cell.innerHTML = fib_val;
 }
 
-function sendRequest(num, callback)
+function sendRequest(current_cell, callback)
 {
 	var baseURL = "http://127.0.0.1:8000/fib/";
-	var url = baseURL + num.innerHTML.trim();
+	var url = baseURL + current_cell.innerHTML.trim();
 	
 	
 	var request = new XMLHttpRequest();
@@ -35,14 +35,13 @@ function sendRequest(num, callback)
 
 	if (this.status >= 200 && this.status < 400) 
 	{
-		//alert(data.fib_n);
-		callback(num, data.fib_n);
+		callback(current_cell, data.fib_n);
 		
 	} 
 	else 
 	{
 		const errorMessage = document.createElement('marquee');
-		errorMessage.textContent = `Gah, it's not working`;
+		errorMessage.textContent = "Request failed...";
 	}
 }
 
