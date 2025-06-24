@@ -21,6 +21,13 @@ class Graph:
 	
 		self.edges.append(e)	
 
+	# Path starts at v1 and terminates at v2. 
+	# I guess I'm implicitly treating this as a directed graph.
+	# Can generalize to undirected later
+	def find_path(self, v1, v2):
+		for e in self.edges:
+			print(e.v1)
+
 	def __str__(self):
 		return f"{self.verticies}\n{self.edges}"	
 
@@ -51,4 +58,7 @@ g.add_edge(e2)
 g.add_edge(e3)
 
 
-print(g)
+#print(g)
+#print("\n\n")
+
+g.find_path("a","b")
