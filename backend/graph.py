@@ -22,36 +22,22 @@ class Graph:
 		self.edges.append(e)	
 
 	# Undirected graph
-	def find_path(self, v1, v2, path=None):
+	def find_path(self, v1, v2, path=[]):
 		#print(f"path at start: {path}")
-		if path is None:
-			path = []
-		
+		path = path + [v1]	
+
 		# Any vertex can get to itself
 		if v1 == v2:
-			return v1
+			return path
 
 
 		# v1 is the start, might want to rename				
 		for v in self.verticies:
-			print(f"Count: {count}")
-			if e not in path:
-				# Assume there aren't a bunch of duplicate edges
-				print(f"e:  {e.v1} and {e.v2}")
-				#print(f"e: {e}")
-				if e.v1 == v1 and e.v2 == v2:
-					path.append(e)
-					return path
-			
-				elif e.v1 == v1:	
-					path.append(e)	
-					#print("second")
-					#print(f"Next find_path(): {e.v2}, {v2}")
-					sub_path = self.find_path(e.v2, v2, path)
-					#print(f"Path now: {sub_path}")
-					#if sub_path:
-						#path = path + sub_path
-				
+			# Don't visit same node multiple times (initially)	
+			if v not in path:
+				sub_path = self.find_path(v, v2, path)
+				if sub_path:
+					return sub_path
 		return None
 
 	def __str__(self):
@@ -88,9 +74,11 @@ g.add_edge(e3)
 print(g)
 print("\n\n")
 
+print(f"find_path(a,a): {g.find_path('a','a')}")
+print("\n\n")
 print(f"find_path(a,b): {g.find_path('a','b')}")
 print("\n\n")
 print(f"find_path(a,d): {g.find_path('a','d')}")
 print("\n\n")
-print(g.find_path("a","c"))
-#print("\n\n")
+print(f"find_path(a,c): {g.find_path('a','c')}")
+print("\n\n")
