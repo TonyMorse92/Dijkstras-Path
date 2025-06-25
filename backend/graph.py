@@ -21,26 +21,36 @@ class Graph:
 	
 		self.edges.append(e)	
 
-	# Path starts at v1 and terminates at v2. 
-	# I guess I'm implicitly treating this as a directed graph.
-	# Can generalize to undirected later
+	# Undirected graph
 	def find_path(self, v1, v2, path=None):
-	#	print(f"path at start: {path}")
+		#print(f"path at start: {path}")
 		if path is None:
-			path = []	
-	
-		# v1 is the start, might want to rename				
-		for e in self.edges:
-			print(f"e: {e}")
-			if e.v1 == v1 and e.v2 == v2:
-				path.append(e)
-				return path
+			path = []
 		
-			elif e.v1 == v1:
-				#print("second")
-				#print(f"Next find_path(): {e.v2}, {v2}")
-				sub_path = self.find_path(e.v2, v2)
-			print(f"Path now: {sub_path}")
+		# Any vertex can get to itself
+		if v1 == v2:
+			return v1
+
+
+		# v1 is the start, might want to rename				
+		for v in self.verticies:
+			print(f"Count: {count}")
+			if e not in path:
+				# Assume there aren't a bunch of duplicate edges
+				print(f"e:  {e.v1} and {e.v2}")
+				#print(f"e: {e}")
+				if e.v1 == v1 and e.v2 == v2:
+					path.append(e)
+					return path
+			
+				elif e.v1 == v1:	
+					path.append(e)	
+					#print("second")
+					#print(f"Next find_path(): {e.v2}, {v2}")
+					sub_path = self.find_path(e.v2, v2, path)
+					#print(f"Path now: {sub_path}")
+					#if sub_path:
+						#path = path + sub_path
 				
 		return None
 
@@ -57,7 +67,7 @@ class Edge:
 
 
 	def __repr__(self):
-		return f"Edge of weight {self.w} from {self.v1} to {self.v2}"
+		return f"Edge of weight {self.w} between {self.v1} and {self.v2}"
 
 
 
@@ -79,7 +89,8 @@ print(g)
 print("\n\n")
 
 print(f"find_path(a,b): {g.find_path('a','b')}")
+print("\n\n")
 print(f"find_path(a,d): {g.find_path('a','d')}")
-
-
-#print(g.find_path("a","c"))
+print("\n\n")
+print(g.find_path("a","c"))
+#print("\n\n")
