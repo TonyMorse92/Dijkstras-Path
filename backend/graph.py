@@ -24,14 +24,16 @@ class Graph:
 	# Path starts at v1 and terminates at v2. 
 	# I guess I'm implicitly treating this as a directed graph.
 	# Can generalize to undirected later
-	def find_path(self, v1, v2):
-		edges_to_check = []
-		path = []
+	def find_path(self, v1, v2, path=[]):
 		for e in self.edges:
 			if e.v1 == v1 and e.v2 == v2:
 				path.append(e)
+				break
+			elif e.v1 == v1:
+				path.append(e)
+				self.find_path(e.v2, v2, path=path)
 
-		print(f"The path is: {path}")	
+		print(f"The path from {v1} to {v2} is: {path}")	
 
 	def __str__(self):
 		return f"{self.verticies}\n{self.edges}"	
@@ -52,8 +54,9 @@ class Edge:
 
 
 e1 = Edge("a", "b", 2)
-e2 = Edge("c", "d", 3)
+e2 = Edge("b", "c", 2)
 e3 = Edge("a", "d", 2)
+e4 = Edge("c", "d", 3)
 
 
 g = Graph()
@@ -66,4 +69,6 @@ g.add_edge(e3)
 print(g)
 print("\n\n")
 
-g.find_path("a","b")
+#g.find_path("a","b")
+#g.find_path("a","d")
+g.find_path("a","c")
