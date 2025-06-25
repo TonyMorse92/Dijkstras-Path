@@ -1,4 +1,4 @@
-### Weighted graph for Dijkstra's algorithm
+## Weighted graph for Dijkstra's algorithm
 
 
 class Graph:
@@ -25,31 +25,22 @@ class Graph:
 	# I guess I'm implicitly treating this as a directed graph.
 	# Can generalize to undirected later
 	def find_path(self, v1, v2, path=None):
-		print(f"path at start: {path}")
+	#	print(f"path at start: {path}")
 		if path is None:
 			path = []	
 	
-		# v1 is the start, might want to rename		
-		path.append(v1)
-	
-		# Every vertex can get to itself	
-		if v1 == v2:
-			return path
-
-		if e.v1 == v1 and e.v2 == v2:
-			return path
-	
+		# v1 is the start, might want to rename				
 		for e in self.edges:
+			print(f"e: {e}")
 			if e.v1 == v1 and e.v2 == v2:
-				print("got here.")	
 				path.append(e)
-				break
-				
+				return path
+		
 			elif e.v1 == v1:
-				print("second")
-				print(f"Next find_path(): {e.v2}, {v2}")
+				#print("second")
+				#print(f"Next find_path(): {e.v2}, {v2}")
 				sub_path = self.find_path(e.v2, v2)
-				print(f"Path now: {sub_path}")
+			print(f"Path now: {sub_path}")
 				
 		return None
 
@@ -87,6 +78,8 @@ g.add_edge(e3)
 print(g)
 print("\n\n")
 
-#print(g.find_path("a","b"))
-#g.find_path("a","d")
-print(g.find_path("a","c"))
+print(f"find_path(a,b): {g.find_path('a','b')}")
+print(f"find_path(a,d): {g.find_path('a','d')}")
+
+
+#print(g.find_path("a","c"))
