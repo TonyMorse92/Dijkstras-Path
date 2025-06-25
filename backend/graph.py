@@ -28,6 +28,17 @@ class Graph:
 		print(f"path at start: {path}")
 		if path is None:
 			path = []	
+	
+		# v1 is the start, might want to rename		
+		path.append(v1)
+	
+		# Every vertex can get to itself	
+		if v1 == v2:
+			return path
+
+		if e.v1 == v1 and e.v2 == v2:
+			return path
+	
 		for e in self.edges:
 			if e.v1 == v1 and e.v2 == v2:
 				print("got here.")	
@@ -36,9 +47,11 @@ class Graph:
 				
 			elif e.v1 == v1:
 				print("second")
-				find_path(e.v2, v2)
+				print(f"Next find_path(): {e.v2}, {v2}")
+				sub_path = self.find_path(e.v2, v2)
+				print(f"Path now: {sub_path}")
 				
-		return path
+		return None
 
 	def __str__(self):
 		return f"{self.verticies}\n{self.edges}"	
@@ -74,6 +87,6 @@ g.add_edge(e3)
 print(g)
 print("\n\n")
 
-print(g.find_path("a","b"))
+#print(g.find_path("a","b"))
 #g.find_path("a","d")
 print(g.find_path("a","c"))
