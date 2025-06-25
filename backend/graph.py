@@ -82,3 +82,8 @@ print(f"find_path(a,d): {g.find_path('a','d')}")
 print("\n\n")
 print(f"find_path(a,c): {g.find_path('a','c')}")
 print("\n\n")
+
+print(f"find_path(c,b): {g.find_path('c','b')}")
+print("\n\n")
+print(f"find_path(d,a): {g.find_path('d','a')}")
+print("\n\n")
